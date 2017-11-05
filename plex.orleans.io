@@ -1,5 +1,5 @@
-upstream router_websocket {
-  server 10.0.0.1:787;
+upstream plex_websocket {
+  server 10.0.0.100:32400;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -8,9 +8,9 @@ map $http_upgrade $connection_upgrade {
 }
 
 server {
-  server_name router.oc.orleans.io;
+  server_name plex.orleans.io;
 
-  listen 443 ssl;
+  listen 443 ssl; # default_server;
   listen [::]:443 ssl;
 
   ssl on;
@@ -24,7 +24,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass https://10.0.0.1:787;
+    proxy_pass https://10.0.0.100:32400;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;
