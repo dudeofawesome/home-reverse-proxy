@@ -8,7 +8,7 @@ map $http_upgrade $connection_upgrade {
 }
 
 server {
-  server_name transmission.orleans.io;
+  server_name transmission.oc.orleans.io;
 
   listen 443 ssl;
   listen [::]:443 ssl;
@@ -24,7 +24,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass https://10.0.0.100:9091;
+    proxy_pass http://10.0.0.100:9091;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;
