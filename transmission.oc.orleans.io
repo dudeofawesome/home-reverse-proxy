@@ -10,8 +10,8 @@ map $http_upgrade $connection_upgrade {
 server {
   server_name transmission.oc.orleans.io;
 
-  listen 443 ssl;
-  listen [::]:443 ssl;
+  listen 4443 ssl;
+  listen [::]:4443 ssl;
 
   ssl on;
   ssl_certificate /etc/letsencrypt/live/oc.orleans.io/fullchain.pem;
