@@ -10,8 +10,8 @@ map $http_upgrade $connection_upgrade {
 server {
   server_name plex.orleans.io;
 
-  listen 443 ssl; # default_server;
-  listen [::]:443 ssl;
+  listen 4443 ssl; # default_server;
+  listen [::]:4443 ssl;
 
   ssl on;
   ssl_certificate /etc/letsencrypt/live/oc.orleans.io/fullchain.pem;
@@ -24,7 +24,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass https://10.0.0.100:32400;
+    proxy_pass https://localhost:32400;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;
