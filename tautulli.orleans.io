@@ -20,7 +20,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass https://localhost:8181;
+    proxy_pass http://localhost:8181;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;
