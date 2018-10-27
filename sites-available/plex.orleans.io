@@ -1,5 +1,5 @@
 upstream plex_websocket {
-  server 172.19.0.1:32400;
+  server host.docker.internal:32400;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -18,7 +18,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass https://172.19.0.1:32400;
+    proxy_pass https://host.docker.internal:32400;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;
