@@ -1,5 +1,5 @@
 upstream guac_websocket {
-  server home-server-docker-conf_guacamole-server_1:8080;
+  server guacamole-server:8080;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -18,7 +18,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://home-server-docker-conf_guacamole-server_1:8080/guacamole/;
+    proxy_pass http://guacamole-server:8080/guacamole/;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

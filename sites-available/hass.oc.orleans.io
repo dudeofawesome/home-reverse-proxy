@@ -1,5 +1,5 @@
 upstream hass_websocket {
-  server home-server-docker-conf_home-assistant_1:8123;
+  server home-assistant:8123;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -18,7 +18,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass https://home-server-docker-conf_home-assistant_1:8123;
+    proxy_pass http://home-assistant:8123;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

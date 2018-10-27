@@ -1,5 +1,5 @@
 upstream ombi_websocket {
-  server home-server-docker-conf_ombi_1:3579;
+  server ombi:3579;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -18,7 +18,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://home-server-docker-conf_ombi_1:3579;
+    proxy_pass http://ombi:3579;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

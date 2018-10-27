@@ -1,5 +1,5 @@
 upstream tautulli_websocket {
-  server home-server-docker-conf_tautulli_1:8181;
+  server tautulli:8181;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -18,7 +18,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://home-server-docker-conf_tautulli_1:8181;
+    proxy_pass http://tautulli:8181;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

@@ -1,5 +1,5 @@
 upstream emby_websocket {
-  server localhost:8096;
+  server host.docker.internal:8096;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -18,7 +18,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://localhost:8096;
+    proxy_pass http://host.docker.internal:8096;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

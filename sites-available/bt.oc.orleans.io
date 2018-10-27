@@ -1,5 +1,5 @@
 upstream bt_oc_websocket {
-  server home-server-docker-conf_deluge-vpn_1:8112;
+  server deluge-vpn:8112;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -18,7 +18,7 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://home-server-docker-conf_deluge-vpn_1:8112;
+    proxy_pass http://deluge-vpn:8112;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;
