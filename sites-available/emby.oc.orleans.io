@@ -27,6 +27,6 @@ server {
     proxy_set_header Connection $connection_upgrade;
   }
 
-  include /usr/local/etc/nginx/snippets/certbot-well-known.conf;
+  include snippets/certbot-well-known.conf;
 }
 
