@@ -17,6 +17,8 @@ server {
 
   proxy_buffering off;
 
+  client_max_body_size 20M;
+
   location / {
     proxy_pass https://host.docker.internal:32400;
     proxy_set_header Host $host;

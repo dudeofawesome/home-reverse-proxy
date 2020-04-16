@@ -1,3 +1,4 @@
+
 upstream bt_oc_websocket {
   server deluge-vpn:8112;
 }
@@ -18,7 +19,9 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://deluge-vpn:8112;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream deluge-vpn:8112;
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;
