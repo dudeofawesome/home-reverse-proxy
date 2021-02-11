@@ -7,7 +7,7 @@ server {
   server_name unifi.oc.orleans.io;
 
   listen 4443 ssl;
-  listen [::]:4443 ssl;
+  listen [::]:4443 ssl http2;
 
   include snippets/ssl-settings.conf;
 

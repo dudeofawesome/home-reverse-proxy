@@ -11,8 +11,8 @@ map $http_upgrade $connection_upgrade {
 server {
   server_name bt.oc.orleans.io;
 
-  listen 4443 ssl;
-  listen [::]:4443 ssl;
+  listen 4443 ssl http2;
+  listen [::]:4443 ssl http2;
 
   include snippets/ssl-settings.conf;
 
