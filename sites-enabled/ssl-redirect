@@ -1,1 +1,6 @@
-../sites-available/ssl-redirect
+server {
+  listen 8080;
+  listen [::]:8080;
+
+  return 302 https://$host$request_uri;
+}

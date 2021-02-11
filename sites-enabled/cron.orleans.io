@@ -1,5 +1,5 @@
-upstream jellyfin_upstream {
-  server host.docker.internal:8086;
+upstream cron_orleans_io_upstream {
+  server healthchecks:8000;
 }
 
 map $http_upgrade $connection_upgrade {
@@ -8,7 +8,7 @@ map $http_upgrade $connection_upgrade {
 }
 
 server {
-  server_name jelly.orleans.io;
+  server_name cron.orleans.io;
 
   listen 4443 ssl http2;
   listen [::]:4443 ssl http2;
@@ -17,11 +17,9 @@ server {
 
   proxy_buffering off;
 
-  client_max_body_size 20M;
-
   location / {
     resolver 127.0.0.11 valid=30s;
-    set $upstream jellyfin_upstream;
+    set $upstream cron_orleans_io_upstream;
 
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
@@ -30,6 +28,7 @@ server {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection $connection_upgrade;
+
     include snippets/hsts-settings.conf;
   }
 
