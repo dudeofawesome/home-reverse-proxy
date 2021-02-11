@@ -25,6 +25,7 @@ server {
     add_header Front-End-Https on;
     resolver 127.0.0.11 valid=30s;
     set $upstream drive_upstream;
+
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
@@ -32,9 +33,9 @@ server {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection $connection_upgrade;
+
     include snippets/hsts-settings.conf;
   }
 
   include snippets/certbot-well-known.conf;
 }
-
