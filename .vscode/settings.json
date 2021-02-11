@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "**/sites-available/*.*": "nginx",
+    "**/sites-enabled/*.*": "nginx",
+    "**/snippets/*.*": "nginx"
+  }
+}
