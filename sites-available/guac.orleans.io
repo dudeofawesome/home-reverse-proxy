@@ -33,4 +33,3 @@ server {
 
   include snippets/certbot-well-known.conf;
 }
-
