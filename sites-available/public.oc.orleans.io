@@ -15,6 +15,8 @@ server {
     root /var/public-www/;
 
     sendfile off;
+
+    include snippets/hsts-settings.conf;
   }
 
   include snippets/certbot-well-known.conf;
