@@ -1,4 +1,4 @@
-upstream netdata_websocket {
+upstream netdata_upstream {
   server netdata:19999;
 }
 
@@ -20,7 +20,10 @@ server {
   include snippets/http-basic-auth.conf;
 
   location / {
-    proxy_pass http://netdata:19999;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream netdata_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

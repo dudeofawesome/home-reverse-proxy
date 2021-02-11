@@ -1,4 +1,4 @@
-upstream drive_websocket {
+upstream drive_upstream {
   server nextcloud:80;
 }
 
@@ -24,7 +24,7 @@ server {
   location / {
     add_header Front-End-Https on;
     resolver 127.0.0.11 valid=30s;
-    set $upstream nextcloud:80;
+    set $upstream drive_upstream;
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;

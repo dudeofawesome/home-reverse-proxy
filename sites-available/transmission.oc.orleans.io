@@ -1,4 +1,4 @@
-upstream transmission_websocket {
+upstream transmission_upstream {
   server 10.0.0.100:9091;
 }
 
@@ -18,7 +18,10 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://localhost:9091;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream transmission_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

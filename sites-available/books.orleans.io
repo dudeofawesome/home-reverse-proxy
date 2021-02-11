@@ -1,4 +1,4 @@
-upstream calibre_websocket {
+upstream calibre_upstream {
   server calibre:8083;
 }
 
@@ -20,7 +20,10 @@ server {
   client_max_body_size 50M;
 
   location / {
-    proxy_pass http://calibre:8083;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream calibre_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

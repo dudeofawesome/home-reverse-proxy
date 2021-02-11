@@ -1,4 +1,4 @@
-upstream ldapcherry_websocket {
+upstream ldapcherry_upstream {
   server ldap-cherry:8080;
 }
 
@@ -21,7 +21,7 @@ server {
 
   location / {
     resolver 127.0.0.11 valid=30s;
-    set $upstream ldap-cherry:8080;
+    set $upstream ldapcherry_upstream;
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;

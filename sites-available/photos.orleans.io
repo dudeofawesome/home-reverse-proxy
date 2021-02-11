@@ -1,5 +1,4 @@
-
-upstream photos_websocket {
+upstream photos_upstream {
   server ownphotos-front:3000;
 }
 
@@ -22,7 +21,7 @@ server {
 
   location / {
     resolver 127.0.0.11 valid=30s;
-    set $upstream ownphotos-front:3000;
+    set $upstream photos_upstream;
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;

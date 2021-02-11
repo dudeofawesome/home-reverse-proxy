@@ -1,4 +1,4 @@
-upstream ombi_websocket {
+upstream ombi_upstream {
   server ombi:3579;
 }
 
@@ -18,7 +18,10 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://ombi:3579;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream ombi_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

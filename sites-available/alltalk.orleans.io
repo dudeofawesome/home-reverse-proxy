@@ -1,4 +1,4 @@
-upstream alltalk_websocket {
+upstream alltalk_upstream {
   server all-talk.herokuapp.com:80;
 }
 
@@ -21,7 +21,7 @@ server {
 
   location / {
     resolver 127.0.0.11 valid=30s;
-    set $upstream all-talk.herokuapp.com:80;
+    set $upstream alltalk_upstream;
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;

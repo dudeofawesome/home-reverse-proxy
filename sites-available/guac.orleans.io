@@ -1,4 +1,4 @@
-upstream guac_websocket {
+upstream guac_upstream {
   server guacamole-server:8080;
 }
 
@@ -18,7 +18,10 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://guacamole-server:8080/;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream guac_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

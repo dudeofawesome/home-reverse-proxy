@@ -1,4 +1,4 @@
-upstream sonarr_websocket {
+upstream sonarr_upstream {
   server sonarr:8989;
 }
 
@@ -18,7 +18,10 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://sonarr:8989;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream sonarr_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

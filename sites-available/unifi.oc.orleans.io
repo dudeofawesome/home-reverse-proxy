@@ -19,7 +19,7 @@ server {
 
   location / {
     resolver 127.0.0.11 valid=30s;
-    set $upstream 10.0.0.111:8443;
+    set $upstream unifi_upstream;
     proxy_pass https://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;

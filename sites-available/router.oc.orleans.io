@@ -1,4 +1,4 @@
-upstream router_websocket {
+upstream router_upstream {
   server 10.0.0.1:787;
 }
 
@@ -18,7 +18,10 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass https://10.0.0.1:787;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream router_upstream;
+
+    proxy_pass https://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

@@ -1,4 +1,4 @@
-upstream docs_websocket {
+upstream docs_upstream {
   server collabora:9980;
 }
 
@@ -19,7 +19,7 @@ server {
 
   location / {
     resolver 127.0.0.11 valid=30s;
-    set $upstream collabora:9980;
+    set $upstream docs_upstream;
     proxy_pass https://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;

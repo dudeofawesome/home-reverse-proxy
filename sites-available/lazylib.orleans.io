@@ -1,4 +1,4 @@
-upstream lazylib_websocket {
+upstream lazylib_upstream {
   server lazy-librarian:5299;
 }
 
@@ -20,7 +20,7 @@ server {
   location / {
     add_header Front-End-Https on;
     resolver 127.0.0.11 valid=30s;
-    set $upstream lazy-librarian:5299;
+    set $upstream lazylib_upstream;
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;

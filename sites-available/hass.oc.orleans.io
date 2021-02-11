@@ -1,4 +1,4 @@
-upstream hass_websocket {
+upstream hass_upstream {
   #server home-assistant:8123;
   server host.docker.internal:8123;
 }
@@ -19,8 +19,10 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://host.docker.internal:8123;
-    # proxy_pass http://home-assistant:8123;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream hass_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     # proxy_redirect http:// https://;
     proxy_http_version 1.1;

@@ -1,4 +1,4 @@
-upstream audio_websocket {
+upstream audio_upstream {
   server booksonic:4040;
 }
 
@@ -21,7 +21,7 @@ server {
 
   location / {
     resolver 127.0.0.11 valid=30s;
-    set $upstream booksonic:4040;
+    set $upstream audio_upstream;
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;

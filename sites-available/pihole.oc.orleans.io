@@ -1,4 +1,4 @@
-upstream pihole_oc_websocket {
+upstream pihole_oc_upstream {
   server pihole:80;
 }
 
@@ -18,7 +18,10 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://pihole:80;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream pihole_oc_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

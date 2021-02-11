@@ -1,4 +1,4 @@
-#upstream webhooks_websocket {
+#upstream webhooks_upstream {
 #  server webhooks:9000/hooks;
 #}
 

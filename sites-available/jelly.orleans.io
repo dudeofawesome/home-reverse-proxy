@@ -1,4 +1,4 @@
-upstream jellyfin_websocket {
+upstream jellyfin_upstream {
   server host.docker.internal:8086;
 }
 
@@ -20,7 +20,10 @@ server {
   client_max_body_size 20M;
 
   location / {
-    proxy_pass http://host.docker.internal:8086;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream jellyfin_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

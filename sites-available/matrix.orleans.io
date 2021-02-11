@@ -1,4 +1,4 @@
-upstream matrix_websocket {
+upstream matrix_upstream {
   server matrix-server:8008;
 }
 
@@ -18,7 +18,10 @@ server {
   proxy_buffering off;
 
   location / {
-    proxy_pass http://matrix-server:8008;
+    resolver 127.0.0.11 valid=30s;
+    set $upstream matrix_upstream;
+
+    proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
     proxy_http_version 1.1;

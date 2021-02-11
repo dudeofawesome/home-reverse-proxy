@@ -1,4 +1,4 @@
-upstream lam_websocket {
+upstream lam_upstream {
   server ldapgui:80;
 }
 
@@ -21,7 +21,7 @@ server {
 
   location / {
     resolver 127.0.0.11 valid=30s;
-    set $upstream ldapgui:80;
+    set $upstream lam_upstream;
     proxy_pass http://$upstream;
     proxy_set_header Host $host;
     proxy_redirect http:// https://;
