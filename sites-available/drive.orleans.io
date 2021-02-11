@@ -17,7 +17,9 @@ server {
 
   proxy_buffering off;
 
-  client_max_body_size 512M;
+  # set max upload size
+  client_max_body_size 10G;
+  fastcgi_buffers 64 4K;
 
   location / {
     add_header Front-End-Https on;
